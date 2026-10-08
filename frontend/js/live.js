@@ -1,6 +1,7 @@
 /* Authenticated SSE controls and real-time post notifications. */
 (() => {
   let source = null;
+  let timer = null;
   function setStatus(enabled, paused = false) {
     const state = window.PulseState.state;
     state.liveEnabled = enabled;
@@ -10,6 +11,12 @@
   function connect() {
     const token = window.PulseApi.getToken();
     if (!token) { window.PulseApp.notify('Sign in again to start Live mode.', 'error'); return; }
+    if (window.PulseApi.staticMode) {
+      clearInterval(timer);
+      setStatus(true, false);
+      timer = setInterval(() => document.dispatchEvent(new CustomEvent('pulse:new-post', { detail: window.PulseStaticApi.createLivePost() })), 2500);
+      return;
+    }
     source?.close();
     source = new EventSource(`${window.PulseApi.API_ROOT}/stream?token=${encodeURIComponent(token)}`);
     source.onopen = () => setStatus(true, false);
@@ -25,7 +32,7 @@
   }
   function toggle() {
     if (window.PulseState.state.liveEnabled) {
-      source?.close(); source = null; setStatus(false, false);
+      source?.close(); source = null; clearInterval(timer); timer = null; setStatus(false, false);
     } else {
       setStatus(true, false); connect();
     }
@@ -34,7 +41,7 @@
     const state = window.PulseState.state;
     if (!state.liveEnabled) return;
     if (state.livePaused) connect();
-    else { source?.close(); source = null; setStatus(true, true); }
+    else { source?.close(); source = null; clearInterval(timer); timer = null; setStatus(true, true); }
   }
-  window.PulseLive = { toggle, pause, stop: () => { source?.close(); source = null; setStatus(false, false); } };
+  window.PulseLive = { toggle, pause, stop: () => { source?.close(); source = null; clearInterval(timer); timer = null; setStatus(false, false); } };
 })();

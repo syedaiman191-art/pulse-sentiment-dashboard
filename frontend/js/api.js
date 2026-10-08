@@ -4,6 +4,7 @@
   function getToken() { try { return localStorage.getItem('pulse.token') || ''; } catch (_) { return ''; } }
   function setToken(token) { try { if (token) localStorage.setItem('pulse.token', token); else localStorage.removeItem('pulse.token'); } catch (_) { /* session can still run in memory */ } }
   async function request(path, options = {}) {
+    if (window.PulseApi.staticMode && window.PulseStaticApi) return window.PulseStaticApi.request(path, options);
     const headers = new Headers(options.headers || {});
     const token = getToken();
     if (token) headers.set('Authorization', `Bearer ${token}`);

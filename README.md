@@ -23,6 +23,10 @@ Pulse is an interactive dashboard that turns social media posts into clear senti
 
 The demo seeds 600 repeatable posts over 30 days about the fictional Lumen phone, including a negative Delivery spike. Posts receive a normalized sentiment score and label. Filters, charts, inbox actions and live posts use the Python API and local SQLite database.
 
+## GitHub Pages demo
+
+The repository root `index.html` opens the frontend on GitHub Pages. Since GitHub Pages only hosts static files and cannot run FastAPI, the frontend detects the `github.io` domain and uses a browser-local demo API instead. Demo accounts, posts, inbox updates and profile/team edits are kept in that browser's local storage; the static demo does not send data to a server. Use the local run steps below for the full SQLite/JWT API.
+
 ## Run locally
 
 From this `pulse` directory:
