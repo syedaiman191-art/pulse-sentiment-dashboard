@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f4f7f4">
+  <title>Pulse · Sign in</title>
+  <link rel="stylesheet" href="css/styles.css?v=python2">
+</head>
+<body class="auth-page">
+  <main class="auth-layout">
+    <section class="auth-brand">
+      <a class="brand" href="index.html" aria-label="Pulse"><span class="brand-mark">P</span><span>pulse</span></a>
+      <div class="auth-pitch">
+        <span class="eyebrow">Lumen phone intelligence</span>
+        <h1>Hear the signal.<br>Find your next move.</h1>
+        <p>One calm place to understand the conversations shaping your product.</p>
+      </div>
+      <div class="auth-foot">Product listening, with a pulse.</div>
+    </section>
+    <section class="auth-content">
+      <div class="auth-form-wrap">
+        <div class="auth-tabs" role="tablist" aria-label="Account access">
+          <button class="auth-tab active" type="button" data-auth-mode="login" role="tab" aria-selected="true">Sign in</button>
+          <button class="auth-tab" type="button" data-auth-mode="signup" role="tab" aria-selected="false">Create account</button>
+        </div>
+        <h2 id="authTitle">Welcome back</h2>
+        <p class="muted" id="authSubtitle">Sign in to your listening workspace.</p>
+        <div class="form-error" id="authError" role="alert" aria-live="polite"></div>
+        <form id="authForm" novalidate>
+          <div class="field" id="nameField" hidden>
+            <label for="name">Your name</label>
+            <input id="name" name="name" autocomplete="name" maxlength="60" placeholder="Alex Morgan">
+            <span class="field-error" data-error="name"></span>
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" autocomplete="email" required placeholder="you@company.com">
+            <span class="field-error" data-error="email"></span>
+          </div>
+          <div class="field">
+            <label for="password">Password</label>
+            <input id="password" name="password" type="password" autocomplete="current-password" required minlength="6" placeholder="At least 6 characters">
+            <span class="field-error" data-error="password"></span>
+          </div>
+          <label class="check-row" id="keepRow"><input id="keepSigned" type="checkbox" checked> Keep me signed in</label>
+          <button class="button primary full-width" type="submit" id="submitAuth">Sign in to Pulse</button>
+        </form>
+        <aside class="demo-note"><strong>Demo workspace</strong><br>Try <code>demo@pulse.test</code> with password <code>pulse-demo</code>. Your demo data stays in this local app.</aside>
+      </div>
+    </section>
+  </main>
+  <script src="js/api.js?v=python2"></script>
+  <script src="js/auth.js?v=python2"></script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+node_modules/
+.env
+pulse.sqlite
+pulse.sqlite-shm
+pulse.sqlite-wal
+pulse.sqlite3
+pulse.sqlite3-shm
+pulse.sqlite3-wal
+venv/
+__pycache__/
+*.py[cod]
